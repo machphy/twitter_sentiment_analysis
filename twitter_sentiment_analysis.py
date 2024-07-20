@@ -7,7 +7,6 @@ from nltk.metrics import BigramAssocMeasures
 import pickle
 import itertools
 
-# Download required NLTK datasets
 nltk.download('twitter_samples')
 nltk.download('punkt')
 
@@ -50,17 +49,11 @@ for word in negative_temp_tweets:
 train_set = negative_tweets[:4000] + positive_tweets[:4000]
 test_set = negative_tweets[4000:] + positive_tweets[4000:]
 
-# Run next 4 instructions if you're running the script for first time 
+
 classifier = NaiveBayesClassifier.train(train_set)
 classify_buffer = open('twitter_reviews.pickle', 'wb')
 pickle.dump(classifier, classify_buffer)
 classify_buffer.close()
-# Comment above 4 instructions if you've run the script once
 
-# Run next 3 instructions if you're running the script second time onwards
-# classify_buffer = open('twitter_reviews.pickle', 'rb')
-# classifier = pickle.load(classify_buffer)
-# classify_buffer.close()
-# Comment above 3 instructions while running the script for first time
 
 print("Accuracy is :", nltk.classify.util.accuracy(classifier, test_set) * 100)
